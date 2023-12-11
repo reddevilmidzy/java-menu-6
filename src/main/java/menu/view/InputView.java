@@ -1,6 +1,7 @@
 package menu.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import menu.model.CoachName;
 
 public class InputView {
 
@@ -9,6 +10,13 @@ public class InputView {
         String names = readLine();
         System.out.println();
         return names;
+    }
+
+    public String readMenuCannotEat(CoachName name) {
+        System.out.printf("%s(이)가 못 먹는 메뉴를 입력해 주세요.%n", name.getName());
+        String menus = readLine();
+        System.out.println();
+        return menus;
     }
 
     protected String readLine() {

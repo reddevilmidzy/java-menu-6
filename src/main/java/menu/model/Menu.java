@@ -64,6 +64,16 @@ public enum Menu {
         this.name = name;
     }
 
+    public static Menu nameOf(String name) {
+        for (Menu menu : Menu.values()) {
+            if (menu.name.equals(name)) {
+                return menu;
+            }
+        }
+        //TODO: 예외 메시지
+        throw new IllegalArgumentException();
+    }
+
     public Category getCategory() {
         return category;
     }

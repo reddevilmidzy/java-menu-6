@@ -13,6 +13,10 @@ public class CoachName {
         //TODO: 길이 2~4 확인
     }
 
+    public String getName() {
+        return name;
+    }
+
     @Override
     public String toString() {
         return "CoachName{" +
