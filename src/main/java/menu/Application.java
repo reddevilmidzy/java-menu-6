@@ -1,13 +1,15 @@
 package menu;
 
 import menu.controller.LunchMenuRecommendationsController;
+import menu.view.InputView;
 import menu.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
+        InputView inputView = new InputView();
         OutputView outputView = new OutputView();
-        LunchMenuRecommendationsController controller = new LunchMenuRecommendationsController(outputView);
+        LunchMenuRecommendationsController controller = new LunchMenuRecommendationsController(inputView, outputView);
         controller.run();
     }
 }
