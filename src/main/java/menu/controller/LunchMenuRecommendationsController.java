@@ -42,6 +42,7 @@ public class LunchMenuRecommendationsController {
         outputView.printResult();
         outputView.printRecommendCategory(category);
         outputView.printRecommendMenu(recommendMenus);
+        outputView.printEndMessage();
     }
 
     private Map<Coach, RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,
