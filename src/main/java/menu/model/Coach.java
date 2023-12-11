@@ -28,6 +28,10 @@ public class Coach {
         //TODO: 쉼표 위치 확인
     }
 
+    public boolean canEat(Menu menu) {
+        return !cannotEat.contains(menu);
+    }
+
     @Override
     public String toString() {
         return "Coach{" +
