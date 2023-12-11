@@ -47,11 +47,11 @@ public class LunchMenuRecommendationsController {
         List<RecommendMenu> recommendMenus = new ArrayList<>();
 
         for (Coach coach : coaches) {
-            System.out.println("coach" + coach);
             recommendMenus.add(recommendation.createRecommend(coach, recommend));
         }
 
-        System.out.println(recommend);
-        System.out.println(recommendMenus);
+//        System.out.println(recommend);
+//        System.out.println(recommendMenus);
+        outputView.printResult();
     }
 }
