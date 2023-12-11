@@ -1,5 +1,8 @@
 package menu.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Category {
 
     JAPANESE(1, "일식"),
@@ -18,12 +21,22 @@ public enum Category {
     }
 
     public static Category fromValueOf(int number) {
-        for (Category category : Category.values()) {
+        for (Category category : values()) {
             if (category.value == number) {
                 return category;
             }
         }
         throw new IllegalStateException();
+    }
+
+    public static List<String> collectMenus(Category category) {
+        List<String> result = new ArrayList<>();
+        for (Menu menu : Menu.values()) {
+            if (category.equals(menu.getCategory())) {
+                result.add(menu.getName());
+            }
+        }
+        return result;
     }
 
     public String getName() {

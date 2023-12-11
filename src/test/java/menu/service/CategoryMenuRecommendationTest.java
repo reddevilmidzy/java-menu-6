@@ -1,11 +1,8 @@
 package menu.service;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
-import menu.model.Category;
 import menu.model.RecommendCategory;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

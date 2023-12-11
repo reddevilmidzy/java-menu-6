@@ -8,6 +8,7 @@ public class Coach {
 
     private final CoachName name;
     private final List<Menu> cannotEat;
+    private RecommendMenu menus = new RecommendMenu();
 
     public Coach(CoachName name, List<Menu> cannotEat) {
         this.name = name;
@@ -32,8 +33,24 @@ public class Coach {
         return name.getName();
     }
 
-    public boolean canEat(Menu menu) {
+    public boolean canRecommend(Menu menu) {
+        return canEat(menu) && !duplicate(menu);
+    }
+
+    private boolean canEat(Menu menu) {
         return !cannotEat.contains(menu);
+    }
+
+    private boolean duplicate(Menu menu) {
+        return menus.duplicate(menu);
+    }
+
+    public void add(Menu menu) {
+        menus.add(menu);
+    }
+
+    public RecommendMenu getMenus() {
+        return menus;
     }
 
     @Override

@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import menu.model.Category;
 import menu.model.Coach;
 import menu.model.CoachName;
 import menu.model.RecommendCategory;
@@ -47,11 +48,16 @@ public class LunchMenuRecommendationsController {
 
     private Map<Coach, RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,
                                                     MenuRecommendation recommendation) {
-        Map<Coach, RecommendMenu> recommendMenus = new LinkedHashMap<>();
-        for (Coach coach : coaches) {
-            recommendMenus.put(coach, recommendation.createRecommend(coach, category));
+        category.initIterator();
+
+        while (category.hasNext()) {
+            Category recommendCategory = category.next();
+            for (Coach coach : coaches) {
+                recommendation.recommend(coach, recommendCategory);
+            }
         }
-        return recommendMenus;
+        return coaches.stream()
+                .collect(Collectors.toMap(coach -> coach, Coach::getMenus, (o1, o2) -> o1, LinkedHashMap::new));
     }
 
     private RecommendCategory recommendCategory() {
