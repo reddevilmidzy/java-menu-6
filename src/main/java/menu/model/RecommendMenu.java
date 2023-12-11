@@ -11,8 +11,8 @@ public class RecommendMenu {
         this.menus = new ArrayList<>();
     }
 
-    public boolean canRecommend(Menu menu) {
-        return !contains(menu);
+    public boolean duplicate(Menu menu) {
+        return contains(menu);
     }
 
     private boolean contains(Menu menu) {
@@ -21,5 +21,10 @@ public class RecommendMenu {
 
     public void add(Menu menu) {
         menus.add(menu);
+    }
+
+    @Override
+    public String toString() {
+        return menus.toString();
     }
 }

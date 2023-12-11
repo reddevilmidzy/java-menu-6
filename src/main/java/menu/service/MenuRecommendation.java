@@ -7,29 +7,31 @@ import java.util.stream.Collectors;
 import menu.model.Category;
 import menu.model.Coach;
 import menu.model.Menu;
+import menu.model.RecommendCategory;
 import menu.model.RecommendMenu;
 
-public class Recommendation {
+public class MenuRecommendation {
 
-    public Menu recommend(List<Menu> menus) {
-        return Randoms.shuffle(menus).get(0);
-    }
-
-    public RecommendMenu createRecommend(Coach coach, List<Category> categories) {
+    public RecommendMenu createRecommend(Coach coach, RecommendCategory categories) {
         RecommendMenu result = new RecommendMenu();
-
-        for (Category category : categories) {
+        categories.initIterator();
+        while (categories.hasNext()) {
+            Category category = categories.next();
             List<Menu> candidate = getMenus(category);
             //TODO: 메서드 분리
             while (true) {
                 Menu recommendMenu = recommend(candidate);
-                if (coach.canEat(recommendMenu) && result.canRecommend(recommendMenu)) {
+                if (coach.canEat(recommendMenu) && !result.duplicate(recommendMenu)) {
                     result.add(recommendMenu);
                     break;
                 }
             }
         }
         return result;
+    }
+
+    private Menu recommend(List<Menu> menus) {
+        return Randoms.shuffle(menus).get(0);
     }
 
     //TODO: 사실 카테고리 마다 계속 List 생성하는건 낭비같음 다른 방법 혹은 최적화 필요

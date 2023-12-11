@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 import menu.model.Coach;
 import menu.model.CoachName;
+import menu.model.RecommendCategory;
+import menu.model.RecommendMenu;
+import menu.service.CategoryRecommendation;
+import menu.service.MenuRecommendation;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -36,5 +40,18 @@ public class LunchMenuRecommendationsController {
             coaches.add(coach);
         }
 
+        CategoryRecommendation categoryRecommendation = new CategoryRecommendation();
+        RecommendCategory recommend = categoryRecommendation.recommend();
+
+        MenuRecommendation recommendation = new MenuRecommendation();
+        List<RecommendMenu> recommendMenus = new ArrayList<>();
+
+        for (Coach coach : coaches) {
+            System.out.println("coach" + coach);
+            recommendMenus.add(recommendation.createRecommend(coach, recommend));
+        }
+
+        System.out.println(recommend);
+        System.out.println(recommendMenus);
     }
 }
