@@ -38,6 +38,7 @@ public class LunchMenuRecommendationsController {
         MenuRecommendation recommendation = new MenuRecommendation();
         List<RecommendMenu> recommendMenus = recommendMenu(coaches, category, recommendation);
         outputView.printResult();
+        outputView.printRecommendCategory(category);
     }
 
     private List<RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,

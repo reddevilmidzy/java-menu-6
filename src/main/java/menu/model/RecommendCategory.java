@@ -30,6 +30,19 @@ public class RecommendCategory implements Iterator<Category> {
         iterator = categories.iterator();
     }
 
+    public String join(String value) {
+        StringBuilder builder = new StringBuilder();
+        initIterator();
+        Category category = iterator.next();
+        builder.append(category.getName());
+        while (iterator.hasNext()) {
+            builder.append(value);
+            category = iterator.next();
+            builder.append(category.getName());
+        }
+        return builder.toString();
+    }
+
     @Override
     public String toString() {
         return categories.toString();
