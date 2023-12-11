@@ -32,6 +32,30 @@ public class LunchMenuRecommendationsController {
                 .map(CoachName::new)
                 .collect(Collectors.toList());
 
+        List<Coach> coaches = readCanNotEatMenus(coachNames);
+        RecommendCategory category = recommendCategory();
+
+        MenuRecommendation recommendation = new MenuRecommendation();
+        List<RecommendMenu> recommendMenus = recommendMenu(coaches, category, recommendation);
+        outputView.printResult();
+    }
+
+    private List<RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,
+                                              MenuRecommendation recommendation) {
+        List<RecommendMenu> recommendMenus = new ArrayList<>();
+
+        for (Coach coach : coaches) {
+            recommendMenus.add(recommendation.createRecommend(coach, category));
+        }
+        return recommendMenus;
+    }
+
+    private RecommendCategory recommendCategory() {
+        CategoryRecommendation categoryRecommendation = new CategoryRecommendation();
+        return categoryRecommendation.recommend();
+    }
+
+    private List<Coach> readCanNotEatMenus(List<CoachName> coachNames) {
         List<Coach> coaches = new ArrayList<>();
 
         for (CoachName coachName : coachNames) {
@@ -39,19 +63,6 @@ public class LunchMenuRecommendationsController {
             Coach coach = Coach.of(coachName, menus);
             coaches.add(coach);
         }
-
-        CategoryRecommendation categoryRecommendation = new CategoryRecommendation();
-        RecommendCategory recommend = categoryRecommendation.recommend();
-
-        MenuRecommendation recommendation = new MenuRecommendation();
-        List<RecommendMenu> recommendMenus = new ArrayList<>();
-
-        for (Coach coach : coaches) {
-            recommendMenus.add(recommendation.createRecommend(coach, recommend));
-        }
-
-//        System.out.println(recommend);
-//        System.out.println(recommendMenus);
-        outputView.printResult();
+        return coaches;
     }
 }

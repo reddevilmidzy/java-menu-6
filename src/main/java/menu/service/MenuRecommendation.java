@@ -17,17 +17,25 @@ public class MenuRecommendation {
         categories.initIterator();
         while (categories.hasNext()) {
             Category category = categories.next();
-            List<Menu> candidate = getMenus(category);
+            List<Menu> candidateMenus = getMenus(category);
             //TODO: 메서드 분리
-            while (true) {
-                Menu recommendMenu = recommend(candidate);
-                if (coach.canEat(recommendMenu) && !result.duplicate(recommendMenu)) {
-                    result.add(recommendMenu);
-                    break;
-                }
-            }
+            recommend(coach, result, candidateMenus);
         }
         return result;
+    }
+
+    private void recommend(Coach coach, RecommendMenu result, List<Menu> candidate) {
+        while (true) {
+            Menu recommendMenu = recommend(candidate);
+            if (canRecommend(coach, result, recommendMenu)) {
+                result.add(recommendMenu);
+                break;
+            }
+        }
+    }
+
+    private boolean canRecommend(Coach coach, RecommendMenu result, Menu recommendMenu) {
+        return coach.canEat(recommendMenu) && !result.duplicate(recommendMenu);
     }
 
     private Menu recommend(List<Menu> menus) {
