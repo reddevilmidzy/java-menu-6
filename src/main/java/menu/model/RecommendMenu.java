@@ -1,6 +1,7 @@
 package menu.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class RecommendMenu {
@@ -21,6 +22,17 @@ public class RecommendMenu {
 
     public void add(Menu menu) {
         menus.add(menu);
+    }
+
+    public String join(String value) {
+        StringBuilder builder = new StringBuilder();
+        Iterator<Menu> iterator = menus.iterator();
+        builder.append(iterator.next().getName());
+        while (iterator.hasNext()) {
+            builder.append(value);
+            builder.append(iterator.next().getName());
+        }
+        return builder.toString();
     }
 
     @Override

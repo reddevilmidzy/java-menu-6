@@ -2,7 +2,9 @@ package menu.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import menu.model.Coach;
 import menu.model.CoachName;
@@ -36,17 +38,17 @@ public class LunchMenuRecommendationsController {
         RecommendCategory category = recommendCategory();
 
         MenuRecommendation recommendation = new MenuRecommendation();
-        List<RecommendMenu> recommendMenus = recommendMenu(coaches, category, recommendation);
+        Map<Coach, RecommendMenu> recommendMenus = recommendMenu(coaches, category, recommendation);
         outputView.printResult();
         outputView.printRecommendCategory(category);
+        outputView.printRecommendMenu(recommendMenus);
     }
 
-    private List<RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,
-                                              MenuRecommendation recommendation) {
-        List<RecommendMenu> recommendMenus = new ArrayList<>();
-
+    private Map<Coach, RecommendMenu> recommendMenu(List<Coach> coaches, RecommendCategory category,
+                                                    MenuRecommendation recommendation) {
+        Map<Coach, RecommendMenu> recommendMenus = new LinkedHashMap<>();
         for (Coach coach : coaches) {
-            recommendMenus.add(recommendation.createRecommend(coach, category));
+            recommendMenus.put(coach, recommendation.createRecommend(coach, category));
         }
         return recommendMenus;
     }

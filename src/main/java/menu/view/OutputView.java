@@ -1,6 +1,9 @@
 package menu.view;
 
+import java.util.Map;
+import menu.model.Coach;
 import menu.model.RecommendCategory;
+import menu.model.RecommendMenu;
 
 public class OutputView {
 
@@ -20,5 +23,15 @@ public class OutputView {
         String joinedCategory = category.join(" | ");
         System.out.print(joinedCategory);
         System.out.println(" ]");
+    }
+
+    public void printRecommendMenu(Map<Coach, RecommendMenu> recommendMenu) {
+        for (Coach coach : recommendMenu.keySet()) {
+            System.out.printf("[ %s | ", coach.getName());
+            RecommendMenu menus = recommendMenu.get(coach);
+            String joinedMenu = menus.join(" | ");
+            System.out.print(joinedMenu);
+            System.out.println(" ]");
+        }
     }
 }
