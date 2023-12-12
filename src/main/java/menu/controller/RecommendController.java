@@ -51,6 +51,8 @@ public class RecommendController {
             Coach coach = coaches.next();
             outputView.printRecommendResult(coach);
         }
+
+        outputView.printEndMessage();
     }
 
     private void recommendMenu(Recommendation recommendation, Category recommendCategory, Coach coach) {

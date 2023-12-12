@@ -32,4 +32,9 @@ public class OutputView {
         System.out.print(joiningSeparator);
         System.out.println(" ]");
     }
+
+    public void printEndMessage() {
+        System.out.println();
+        System.out.print("추천을 완료했습니다.");
+    }
 }
