@@ -96,4 +96,20 @@ public class Coach {
     public List<Menu> getRecommendMenu() {
         return recommendMenu;
     }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Coach)) {
+            return false;
+        }
+        return this.name.equals(((Coach) obj).name);
+    }
 }

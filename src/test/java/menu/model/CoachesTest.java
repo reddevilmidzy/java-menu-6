@@ -16,4 +16,14 @@ class CoachesTest {
         assertThatThrownBy(() -> Coaches.from(value))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"동근,동글,동근", "오른손,오른손"})
+    @DisplayName("중복된 코치 이름 입력시 예외")
+    void createDuplicate(String value) {
+
+        assertThatThrownBy(() -> Coaches.from(value))
+                .isInstanceOf(IllegalArgumentException.class);
+
+    }
 }
