@@ -1,6 +1,9 @@
 package menu.controller;
 
+import java.util.List;
+import menu.model.Coach;
 import menu.model.Coaches;
+import menu.model.Menu;
 import menu.view.InputView;
 import menu.view.OutputView;
 
@@ -22,6 +25,22 @@ public class InputController {
                 //TODO: 예외 출력
             }
         }
+    }
+
+    public List<Menu> getCannotEatMenu(Coach coach) {
+        while (true) {
+            try {
+                return readCannotEatMenu(coach);
+            } catch (IllegalArgumentException exception) {
+                //TODO: 예외 출력
+            }
+        }
+    }
+
+    private List<Menu> readCannotEatMenu(Coach coach) {
+        String value = inputView.readCannotEatMenu(coach);
+        coach.validateCannotEatMenu(value);
+        return coach.convert(value);
     }
 
     private Coaches readCoaches() {

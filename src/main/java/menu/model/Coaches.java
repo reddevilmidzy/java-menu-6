@@ -1,16 +1,18 @@
 package menu.model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Coaches {
+public class Coaches implements Iterator<Coach> {
 
     public static final String SEPARATOR = ",";
     public static final int MIN_COACH_LENGTH = 2;
     public static final int MAX_COACH_LENGTH = 5;
 
     private final List<Coach> coaches;
+    private Iterator<Coach> iterator;
 
     private Coaches(List<Coach> coaches) {
         this.coaches = coaches;
@@ -62,5 +64,19 @@ public class Coaches {
         if (value.contains(SEPARATOR.repeat(2))) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public void initIterator() {
+        iterator = coaches.iterator();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return iterator.hasNext();
+    }
+
+    @Override
+    public Coach next() {
+        return iterator.next();
     }
 }

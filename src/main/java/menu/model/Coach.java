@@ -1,8 +1,15 @@
 package menu.model;
 
+import static menu.model.Coaches.SEPARATOR;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Coach {
 
     private final String name;
+    private List<Menu> cannotEatMenu;
 
 
     private Coach(String name) {
@@ -12,6 +19,38 @@ public class Coach {
     public static Coach from(String value) {
         validate(value);
         return new Coach(value);
+    }
+
+    //TODO: setter 안쓰는 방법 찾기
+    public void setCannotEatMenu(List<Menu> cannotEatMenu) {
+        this.cannotEatMenu = cannotEatMenu;
+    }
+
+    public List<Menu> convert(String value) {
+        if (value.trim().isEmpty()) {
+            return List.of();
+        }
+        return Arrays.stream(value.split(SEPARATOR))
+                .map(Menu::from)
+                .collect(Collectors.toList());
+    }
+
+    public void validateCannotEatMenu(String value) {
+        if (value.trim().isEmpty()) {
+            return;
+        }
+        if (value.startsWith(SEPARATOR)) {
+            throw new IllegalArgumentException();
+        }
+        if (value.endsWith(SEPARATOR)) {
+            throw new IllegalArgumentException();
+        }
+        if (value.contains(SEPARATOR.repeat(2))) {
+            throw new IllegalArgumentException();
+        }
+        if (value.split(SEPARATOR).length > 2) {
+            throw new IllegalArgumentException();
+        }
     }
 
     private static void validate(String value) {
@@ -32,5 +71,9 @@ public class Coach {
         if (value.trim().isEmpty()) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public String getName() {
+        return name;
     }
 }
