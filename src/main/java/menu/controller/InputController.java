@@ -22,7 +22,7 @@ public class InputController {
             try {
                 return readCoaches();
             } catch (IllegalArgumentException exception) {
-                //TODO: 예외 출력
+                outputView.printErrorMessage(exception);
             }
         }
     }
@@ -32,7 +32,7 @@ public class InputController {
             try {
                 return readCannotEatMenu(coach);
             } catch (IllegalArgumentException exception) {
-                //TODO: 예외 출력
+                outputView.printErrorMessage(exception);
             }
         }
     }

@@ -1,5 +1,7 @@
 package menu.model;
 
+import static menu.constant.ErrorMessage.INVALID_COACH_NAME;
+import static menu.constant.ErrorMessage.INVALID_MENU;
 import static menu.model.Coaches.SEPARATOR;
 
 import java.util.ArrayList;
@@ -54,16 +56,16 @@ public class Coach {
             return;
         }
         if (value.startsWith(SEPARATOR)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_MENU.getMessage());
         }
         if (value.endsWith(SEPARATOR)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_MENU.getMessage());
         }
         if (value.contains(SEPARATOR.repeat(2))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_MENU.getMessage());
         }
         if (value.split(SEPARATOR).length > 2) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_MENU.getMessage());
         }
     }
 
@@ -74,16 +76,16 @@ public class Coach {
 
     private static void validateLength(String value) {
         if (value.length() < 2 || value.length() > 4) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
     }
 
     private static void validateNull(String value) {
         if (value == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
         if (value.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
     }
 

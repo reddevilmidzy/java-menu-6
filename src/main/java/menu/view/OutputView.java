@@ -8,6 +8,8 @@ import menu.model.Menu;
 
 public class OutputView {
 
+    public static final String ERROR_PREFIX = "[ERROR] %s%n";
+
     public void printStartMessage() {
         System.out.println("점심 메뉴 추천을 시작합니다.");
         System.out.println();
@@ -36,5 +38,9 @@ public class OutputView {
     public void printEndMessage() {
         System.out.println();
         System.out.print("추천을 완료했습니다.");
+    }
+
+    public void printErrorMessage(Throwable error) {
+        System.out.printf(ERROR_PREFIX, error.getMessage());
     }
 }

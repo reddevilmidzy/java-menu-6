@@ -1,5 +1,7 @@
 package menu.model;
 
+import static menu.constant.ErrorMessage.INVALID_MENU;
+
 public enum Menu {
 
     GYUDON(Category.JAPANESE, "규동"),
@@ -73,8 +75,7 @@ public enum Menu {
                 return menu;
             }
         }
-        //TODO: 등록되지 않은 메뉴, 예외처리
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(INVALID_MENU.getMessage());
     }
 
     public String getName() {

@@ -1,5 +1,7 @@
 package menu.model;
 
+import static menu.constant.ErrorMessage.INVALID_COACH_NAME;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -41,28 +43,28 @@ public class Coaches implements Iterator<Coach> {
     private static void validateLength(String value) {
         int length = value.trim().split(SEPARATOR).length;
         if (MIN_COACH_LENGTH > length || MAX_COACH_LENGTH < length) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
     }
 
     private static void validateNull(String value) {
         if (value == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
         if (value.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
     }
 
     private static void validateSeparator(String value) {
         if (value.startsWith(SEPARATOR)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
         if (value.endsWith(SEPARATOR)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
         if (value.contains(SEPARATOR.repeat(2))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(INVALID_COACH_NAME.getMessage());
         }
     }
 
