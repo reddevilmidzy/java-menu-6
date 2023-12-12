@@ -1,8 +1,8 @@
 package menu.model;
 
-import java.util.LinkedHashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum Category {
     JAPANESE("일식", 1),
@@ -11,19 +11,6 @@ public enum Category {
     ASIAN("아시안", 4),
     WESTERN("양식", 5),
     ;
-
-    private static Map<Category, List<String>> menusName = createMenus();
-
-    private static Map<Category, List<String>> createMenus() {
-        Map<Category, List<String>> result = new LinkedHashMap<>();
-
-        for (Menu menu : Menu.values()) {
-            List<String> categoryMenu = result.getOrDefault(menu.getCategory(), List.of());
-            categoryMenu.add(menu.getName());
-            result.put(menu.getCategory(), categoryMenu);
-        }
-        return result;
-    }
 
     private final String name;
     private final int index;
@@ -42,8 +29,11 @@ public enum Category {
         throw new IllegalArgumentException();
     }
 
-    public static List<String> getMenusOf(Category category) {
-        return menusName.get(category);
+    public List<String> getMenus() {
+        return Arrays.stream(Menu.values())
+                .filter(menu -> menu.getCategory().equals(this))
+                .map(Menu::getName)
+                .collect(Collectors.toList());
     }
 
     public String getName() {

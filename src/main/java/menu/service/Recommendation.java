@@ -27,7 +27,7 @@ public class Recommendation {
     }
 
     public Menu getRecommendMenu(Category category) {
-        List<String> candidateMenus = Category.getMenusOf(category);
+        List<String> candidateMenus = category.getMenus();
         return recommendMenu(candidateMenus);
     }
 

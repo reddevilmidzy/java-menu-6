@@ -36,13 +36,20 @@ public class RecommendController {
         Recommendation recommendation = new Recommendation(generator);
         List<Category> categories = recommendation.getRecommendCategory();
 
-        coaches.initIterator();
-
         for (Category recommendCategory : categories) {
+            coaches.initIterator();
             while (coaches.hasNext()) {
                 Coach coach = coaches.next();
                 recommendMenu(recommendation, recommendCategory, coach);
             }
+        }
+
+        outputView.printRecommendCategory(categories);
+        coaches.initIterator();
+
+        while (coaches.hasNext()) {
+            Coach coach = coaches.next();
+            outputView.printRecommendResult(coach);
         }
     }
 
