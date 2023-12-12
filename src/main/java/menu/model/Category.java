@@ -16,5 +16,16 @@ public enum Category {
         this.index = index;
     }
 
+    public static Category indexOf(int index) {
+        for (Category category : Category.values()) {
+            if (category.index == index) {
+                return category;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
 
+    public String getName() {
+        return name;
+    }
 }

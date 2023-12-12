@@ -76,4 +76,8 @@ public enum Menu {
         //TODO: 등록되지 않은 메뉴, 예외처리
         throw new IllegalArgumentException();
     }
+
+    public String getName() {
+        return name;
+    }
 }
