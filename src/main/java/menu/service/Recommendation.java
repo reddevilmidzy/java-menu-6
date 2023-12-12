@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import menu.model.Category;
 import menu.model.Menu;
 
@@ -27,15 +26,17 @@ public class Recommendation {
         return categories;
     }
 
+    public Menu getRecommendMenu(Category category) {
+        List<String> candidateMenus = Category.getMenusOf(category);
+        return recommendMenu(candidateMenus);
+    }
+
     private Category recommendCategory() {
         int index = generator.generate();
         return Category.indexOf(index);
     }
 
-    public Menu recommendMenu(List<Menu> menus) {
-        List<String> candidateMenus = menus.stream()
-                .map(Menu::getName)
-                .collect(Collectors.toList());
+    private Menu recommendMenu(List<String> candidateMenus) {
         String name = Randoms.shuffle(candidateMenus).get(0);
         return Menu.from(name);
     }

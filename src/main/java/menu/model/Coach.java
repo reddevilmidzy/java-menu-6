@@ -2,6 +2,7 @@ package menu.model;
 
 import static menu.model.Coaches.SEPARATOR;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +11,7 @@ public class Coach {
 
     private final String name;
     private List<Menu> cannotEatMenu;
+    private final List<Menu> recommendMenu = new ArrayList<>();
 
 
     private Coach(String name) {
@@ -24,6 +26,18 @@ public class Coach {
     //TODO: setter 안쓰는 방법 찾기
     public void setCannotEatMenu(List<Menu> cannotEatMenu) {
         this.cannotEatMenu = cannotEatMenu;
+    }
+
+    public boolean canEat(Menu menu) {
+        return !cannotEatMenu.contains(menu);
+    }
+
+    public void addRecommendMenu(Menu menu) {
+        recommendMenu.add(menu);
+    }
+
+    public boolean duplicateMenu(Menu menu) {
+        return recommendMenu.contains(menu);
     }
 
     public List<Menu> convert(String value) {
@@ -75,5 +89,9 @@ public class Coach {
 
     public String getName() {
         return name;
+    }
+
+    public List<Menu> getRecommendMenu() {
+        return recommendMenu;
     }
 }

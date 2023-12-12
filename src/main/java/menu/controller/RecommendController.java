@@ -35,6 +35,28 @@ public class RecommendController {
         Generator<Integer> generator = new RandomNumberGenerator();
         Recommendation recommendation = new Recommendation(generator);
         List<Category> categories = recommendation.getRecommendCategory();
-        System.out.println(categories);
+
+        coaches.initIterator();
+
+        for (Category recommendCategory : categories) {
+            while (coaches.hasNext()) {
+                Coach coach = coaches.next();
+                recommendMenu(recommendation, recommendCategory, coach);
+            }
+        }
+    }
+
+    private void recommendMenu(Recommendation recommendation, Category recommendCategory, Coach coach) {
+        while (true) {
+            Menu recommendMenu = recommendation.getRecommendMenu(recommendCategory);
+            if (canRecommend(coach, recommendMenu)) {
+                coach.addRecommendMenu(recommendMenu);
+                break;
+            }
+        }
+    }
+
+    private boolean canRecommend(Coach coach, Menu recommendMenu) {
+        return coach.canEat(recommendMenu) && !coach.duplicateMenu(recommendMenu);
     }
 }
