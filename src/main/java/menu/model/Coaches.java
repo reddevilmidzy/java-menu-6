@@ -7,21 +7,26 @@ import java.util.stream.Collectors;
 public class Coaches {
 
     public static final String SEPARATOR = ",";
-    public static int MIN_COACH_LENGTH = 2;
-    public static int MAX_COACH_LENGTH = 5;
+    public static final int MIN_COACH_LENGTH = 2;
+    public static final int MAX_COACH_LENGTH = 5;
 
-    private final List<String> coaches;
+    private final List<Coach> coaches;
 
-    private Coaches(List<String> coaches) {
+    private Coaches(List<Coach> coaches) {
         this.coaches = coaches;
     }
 
     public static Coaches from(String value) {
         validate(value);
-        List<String> coaches = Arrays.stream(value.split(SEPARATOR))
+        List<Coach> coaches = Arrays.stream(value.split(SEPARATOR))
                 .map(String::valueOf)
+                .map(Coach::from)
                 .collect(Collectors.toList());
         return new Coaches(coaches);
+    }
+
+    public List<Coach> getCoaches() {
+        return coaches;
     }
 
     private static void validate(String value) {
@@ -42,7 +47,7 @@ public class Coaches {
         if (value == null) {
             throw new IllegalArgumentException();
         }
-        if (value.trim().equals("") || value.isEmpty()) {
+        if (value.trim().isEmpty()) {
             throw new IllegalArgumentException();
         }
     }
